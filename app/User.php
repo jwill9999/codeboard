@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Project;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,12 +29,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+  /**
+   *  @var array
+   */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * a User has many projects $user->projects
+     *
+     * @return void
+     */
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'owner_id');
+    }
 }
