@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Project;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,6 +27,23 @@ class ProjectTest extends TestCase
 
         $this->get('/projects')->assertSee($attributes['title']);
     }
+
+
+    /**
+     * @test
+     *
+     */
+    public function userCanViewAProject()
+    {
+        $this->withoutExceptionHandling();
+
+        $project = factory('App\Project')->create();
+
+        $this->get($project->path())
+            ->assertSee($project->title)
+            ->assertSee($project->description);
+    }
+
 
     /** @test */
     public function projectRequiresATitle()

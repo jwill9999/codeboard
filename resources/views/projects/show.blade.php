@@ -7,13 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>CodeBoard</h1>
-    <ul>
-        @forelse ($projects as $project)
-            <a href="{{$project->path()}}"><li>{{$project->title}}</li></a>
-        @empty
-            <li>No Projects available</li>
-        @endforelse
-    </ul>
+<h1>{{$project->title}}</h1>
+<p>{{$project->description}}</p>
 </body>
 </html>
